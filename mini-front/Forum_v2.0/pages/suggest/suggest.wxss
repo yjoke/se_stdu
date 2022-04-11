@@ -1,0 +1,8 @@
+/* pages/suggest/suggest.wxss */
+.hr{
+  height:5px;
+  background-color: #cccccc;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  opacity: 0.2;
+}

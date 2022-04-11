@@ -1,0 +1,20 @@
+<!--pages/comment/comment.wxml-->
+
+<scroll-view scroll-y="{{isScroll}}" style='height:{{windowHeight}}px'>
+	<view class="hr"></view>
+	<block wx:for="{{comment}}" wx:key='null' >
+	<view data-index='{{index}}' class="order-item" bindtouchstart="drawStart" bindtouchmove="drawMove" bindtouchend="drawEnd" style="right:{{item.right}}rpx">
+		<view catchtap="goPostInfo" data-id="{{item.post.postId}}" >
+			<view class="content">
+				<view class="nickname">{{item.user.userName}}</view>
+				<text decode="true">&nbsp;评论了我的帖子</text>
+			</view>
+			<view class="nickname">{{item.post.postTitle}}</view>
+		</view>
+		<view class="remove" bindtap="delItem" data-id="{{index}}"
+			data-commentId="{{item.commentId}}">删除
+		</view>
+	</view>
+	<view class="hr"></view>
+	</block>
+</scroll-view>

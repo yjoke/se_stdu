@@ -1,0 +1,25 @@
+<page-meta root-font-size="system"/>
+<view class="page" data-weui-theme="{{theme}}">
+	<view class="weui-msg">
+		<view class="weui-msg__icon-area"><text class="weui-icon-warn weui-icon_msg"></text></view>
+		<view class="weui-msg__text-area">
+			<h2 class="weui-msg__title">操作失败</h2>
+			<view class="weui-msg__desc">网络错误</view>
+		</view>
+		
+		<view class="weui-msg__opr-area">
+			<view class="weui-btn-area">
+				<button class="weui-btn weui-btn_default" aria-role="button" 
+					bindtap="goSubmit" >返回</button>
+			</view>
+		</view>
+		<view class="weui-msg__extra-area">
+			<view class="weui-footer">
+				<view class="weui-footer__links">
+					<navigator url="null" class="weui-wa-hotarea weui-footer__link" bindTap="goSuggest">可以放个写建议的连接！</navigator>
+				</view>
+				<view class="weui-footer__text">极限二托一开发</view>
+			</view>
+		</view>
+	</view>
+</view>

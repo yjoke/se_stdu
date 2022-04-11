@@ -1,0 +1,101 @@
+<page-meta root-font-size="system"/>
+<!-- 搜索框 -->
+<view class="weui-search-bar {{inputShowed ? 'weui-search-bar_focusing' : ''}}" id="searchBar">
+	<form class="weui-search-bar__form" aria-role="combobox" aria-haspopup="true"
+		aria-expanded="{{inputVal.length > 0 ? 'true' : 'false'}}" aria-owns="searchResult" >
+		<view class="weui-search-bar__box">
+			<i class="weui-icon-search"></i>
+			<input aria-controls="searchResult" type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping"/>
+			<view aria-role="button" aria-label="清除" class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput"></view>
+		</view>
+		<label class="weui-search-bar__label" bindtap="showInput">
+			<i class="weui-icon-search"></i>
+			<span class="weui-search-bar__text">搜索</span>
+		</label>
+	</form>
+	<view aria-role="button" class="weui-search-bar__cancel-btn" bindtap="hideInput">取消</view>
+</view>
+
+<!-- 搜索结果 这里要写成循环 -->
+<view class="page" data-weui-theme="{{theme}}" wx:if="{{inputVal.length > 0}}">
+	<view aria-role="listbox" id="searchResult" class="weui-cells searchbar-result" wx:if="{{inputVal.length > 0}}">
+		<block wx:for="{{searchResult}}" wx:key="null">
+			<view role="option" class="weui-cell weui-cell_active weui-cell_access"
+				catchtap="goPostInfo" data-id="{{item.postId}}" >
+				<view class="weui-cell__bd weui-cell_primary">
+					<view>{{item.postTitle}}</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>
+
+<!-- 搜索框以外的东西 -->
+<block wx:if="{{inputVal.length <= 0}}">
+<!-- 轮播图 -->
+<view class="swiper">
+	<swiper indicator-dots="true" style='height:150px' autoplay="true" circular="true"> 
+		<block wx:for="{{slide}}" wx:key='null'>
+			<swiper-item>
+				<image src='{{item.slideUrl}}'style="width:100%;height:150px" lazy-load="true"
+					bindtap="previewImage" id="{{index}}"
+				></image>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+
+<view class="hr"></view>  
+<!-- 分栏 -->
+<view class="nav">
+	<block wx:for="{{postType}}" wx:key="null">
+		<view style="font-weight:1000" class="item {{current == index ? 'active' : ''}}" catchtap="onClick" data-id="{{index}}">
+			{{item}}
+		</view>
+	</block>
+</view>
+<!--wx:if="{{idx == current}}"-->
+
+<view class="hr"></view> 
+ <!--  -->
+<view bindtouchstart='touchStart' bindtouchend="touchEnd" style="width: 100%;height: 100%;">
+<view class="con_list">
+	<block wx:for="{{post}}" wx:key="null">
+		<block wx:if="{{item.postType == postType[current]}}" >
+			<!-- 这一个内容是一个帖子的内容 -->
+			<view class="list" >
+				<view class="postcss" catchtap="goPostInfo" data-id="{{item.postId}}" >
+					<image wx:if="{{item.postFirstImgUrl != ''}}" lazy-load="true"
+						src="{{item.postFirstImgUrl}}"
+						style="width:310rpx;height:250rpx"
+						class="postFirstImgUrl" >
+					</image>
+					<image wx:else 
+						src="{{src + current + '.jpg'}}"
+						style="width:310rpx;height:250rpx"
+						class="postFirstImgUrl" >
+					</image>
+					<view>{{item.postTitle}}</view>
+					<!-- <view class="hr"></view> -->
+				</view>
+			</view>
+			<!-- 一个帖子内容在这里结束 -->
+		</block>
+	</block>
+</view>
+</view><!-- 滑动判断 -->
+</block>
+
+<!-- 授权框 -->
+<view aria-role="dialog" aria-modal="true" class="fadeIn" wx:if="{{authFlag}}">
+	<view class="weui-mask"></view>
+	<view class="weui-dialog">
+		<view class="weui-dialog__hd"><strong class="weui-dialog__title">授权</strong></view>
+		<view class="weui-dialog__bd">您还未授权</view>
+		<view class="weui-dialog__ft">
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_default" bindtap="close">取消</view>
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_primary" bindtap="auth" style="color:rgb(59, 230, 82)">授权</view>
+		</view>
+	</view>
+</view>
+

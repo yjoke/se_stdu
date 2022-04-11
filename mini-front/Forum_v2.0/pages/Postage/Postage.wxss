@@ -1,0 +1,71 @@
+/* pages/Postage/Postage.wxss */
+.page{height:100%;background:var(--weui-BG-2)}.weui-bottom-fixed-opr-demo{padding:15px 5px 0}
+.wenbenkuang {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    padding: 0rpx;
+}
+.tianjiatupian {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 40rpx;
+    justify-content: space-around;
+}
+.biaoti {
+    font-size: 55rpx;
+    color:rgba(170, 6, 6, 0.815);
+}
+.intro {
+    font-size: 45rpx;
+    color:rgb(2, 2, 2);
+}
+.moment_img {
+    width: 230rpx;
+    height: 230rpx;
+}
+
+.image {
+    position: relative;
+}
+
+.cha {
+    position: absolute;
+    top: 0;
+}
+
+.submit {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.main {
+
+    text-align: center;
+    font-size: 40rpx;
+    padding: 35rpx;
+    font-weight: 1000;
+    color: rgb(245, 244, 247);
+    background-color: #D53e37;
+    position: fixed;
+    bottom:0;
+}
+.weui-cells__title{
+    color:#e95d56
+}
+
+.chooseImv {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.iamge_cancel{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    position:relative;
+    top:-95px;
+    right:-75px;
+    /* z-index:800; */
+}

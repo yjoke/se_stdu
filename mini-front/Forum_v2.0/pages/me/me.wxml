@@ -1,0 +1,64 @@
+<view class="header">
+  <!--头像昵称--> 
+	<view class="root">
+		 <image class="userImgUrl" src="{{user.userImgUrl}}"></image>
+		 <text class="userName">{{user.userName}}</text>
+	</view>
+	<view class="set">
+		 <image src='/images/other/set.png' style="width:25px;height:25px" bindtap='set'></image>
+	</view>    
+		<view class="Collect-Likes" >
+			<view style="margin-right: 80rpx;color:rgb(255, 255, 255);font-size:14px;font-weight:400">{{user.userLikeNum}}</view>
+			<view style="margin-right: 5rpx;color:rgb(255, 255, 255);font-size:20px;font-weight:800">我的点赞</view>
+		</view> 
+</view> 
+
+<view >
+
+	<view class="item" bindtap="like">
+		<text>点赞我的</text>
+		<view class="right_arrow"></view>
+	</view>
+
+  	<view class="item" bindtap="comment">
+		<text>评论我的</text>
+		<view class="right_arrow"></view>
+	</view>
+
+ 	<view class="item" bindtap="feedback">
+		<text>反馈建议</text>
+		<view class="right_arrow"></view>
+  	</view>
+
+	<view class="item" bindtap="help">
+		<text>帮助文档</text>
+		<view class="right_arrow"></view>
+	</view>
+
+</view>
+
+<!-- 授权框 -->
+<view aria-role="dialog" aria-modal="true" class="fadeIn" wx:if="{{!authFlag}}">
+	<view class="weui-mask"></view>
+	<view class="weui-dialog">
+		<view class="weui-dialog__hd"><strong class="weui-dialog__title">授权</strong></view>
+		<view class="weui-dialog__bd">您还未授权</view>
+		<view class="weui-dialog__ft">
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_default" bindtap="close">取消</view>
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_primary" bindtap="auth" style="color:rgb(59, 230, 82)">授权</view>
+		</view>
+	</view>
+</view>
+
+<!-- 修改框 -->
+<view aria-role="dialog" aria-modal="true" class="fadeIn" wx:if="{{setFlag}}">
+	<view class="weui-mask"></view>
+	<view class="weui-dialog">
+		<view class="weui-dialog__hd"><strong class="weui-dialog__title">修改信息</strong></view>
+		<view class="weui-dialog__bd">是否确认同步当前的微信头像</view>
+		<view class="weui-dialog__ft">
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_default" bindtap="setClose">取消</view>
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_primary" bindtap="setAuth" style="color:rgb(59, 230, 82)">确认</view>
+		</view>
+	</view>
+</view>

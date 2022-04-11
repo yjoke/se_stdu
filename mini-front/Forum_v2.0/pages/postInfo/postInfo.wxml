@@ -1,0 +1,153 @@
+
+
+<view class="message">
+	<view class="left">
+	<image class="face-img" src = "{{user.userImgUrl}}"></image>
+	</view>
+	<!--右半边，就是昵称图片和删除处g-->
+	<view class="right">
+
+		<view class="nickname">{{user.userName}}</view>
+		<view><text>{{post.postText}}</text></view>
+
+		<!-- 无图片 -->
+		<view wx:if="{{!post.postImgUrl[0]}}">
+		</view>
+		<!--单图布局-->
+		<view class = "images-wrap" wx:elif="{{post.postImgUrl.length < 2}}">
+			<image src = "{{post.postImgUrl[0]}}" class = "image-1" bindtap="previewImage" id="{{0}}"></image>
+		</view>
+		<!--2-3图布局-->
+		<view class = "images-wrap" wx:elif="{{post.postImgUrl.length < 4}}">
+			<block wx:for="{{post.postImgUrl}}" wx:key="null">
+				<image src = "{{item}}" class = "image-2-3"  bindtap="previewImage" id="{{index}}"></image>
+			</block>
+		</view>
+		<!--4图布局-->
+		<view class = "images-wrap"  wx:elif="{{post.postImgUrl.length < 5}}">
+			<block wx:for="{{post.postImgUrl}}" wx:key="null">
+				<image src = "{{item}}" class="image-4" bindtap="previewImage" id="{{index}}"></image>
+			</block>
+		</view>
+		<!--5到9张图片的布局-->
+		<view class = "images-wrap"  wx:else>
+			<block wx:for="{{post.postImgUrl}}" wx:key="null">
+				<image src = "{{item}}" class="image-5-9" bindtap="previewImage" id="{{index}}"></image>
+			</block>
+		</view>
+
+		<view class="time-delete">
+			<view class="time">{{post.postTime}}</view>
+			<view class="delete" catchtap="delete" wx:if="{{userId == user.userId}}">删除</view>
+		</view>
+
+		<!--点赞评论按钮-->
+		<view class="hudong-box">
+
+			<view class="hudong-cell" catchtap="comment">
+			<!--<image src="/iamges/pinglun2.png" class="huodong-img"></image>-->
+				<image wx:if="{{commentFlag}}" src="/images/pinglun3.png" class="huodong-img"></image>
+				<image wx:else src="/images/pinglun.png" class="huodong-img"></image>
+				<view>评论</view>
+			</view>
+
+			<view class="hudong-cell" bindtap="like">
+				<!--<image src="/iamges/dianzan2.png" class="huodong-img"></image>-->
+				<image wx:if="{{likeFlag}}" src="/images/dianzan5.png" class="huodong-img"></image>
+				<image wx:else src="/images/dianzan2.png" class="huodong-img"></image>
+				<view>点赞</view>
+			</view>
+		</view>
+
+		<!--点赞列表-->
+		<!-- <view class="prize-box">
+			<image src="/images/dianzan5.png" class = "prize-img"></image>
+			<view>邓伦，</view>
+			<view>朴宝剑，</view>
+			<view>justin，</view>
+			<view>小明，</view>
+			<view>小红，</view>
+			<view>霉霉</view>
+		</view> -->
+
+		<!--评论-->
+		<block  wx:if="{{commentFlag}}" >
+			<block wx:for="{{comments}}" wx:key="null" >
+			<view class="comment-box">
+			<view class="comment-right" >
+			<view class="comment-one">
+			<view class="comment-content">
+						
+				<block wx:if="{{item.replier.userId == ''}}" >
+					<view class="comment-nickname">
+						{{item.user.userName}} :
+					</view>
+				</block><block wx:else>
+					<view class="comment-content-2"> 
+						<view class="comment-nickname">{{item.user.userName}}</view>
+						<text decode="true">&nbsp;回复&nbsp;</text>
+						<view class="comment-nickname">{{item.replier.userName}} :</view>
+					</view>
+				</block>
+
+				<view class="comment-text" bindlongpress='delComment'
+					data-userId="{{item.user.userId}}"
+					data-commentId="{{item.comment.commentId}}"
+					data-index="{{index}}">
+					{{item.comment.commentText}}
+				</view>
+
+			</view> <!-- 四层评论属性 -->
+			</view>
+			</view>
+			</view>
+			</block>
+		</block>
+
+
+
+	</view>
+
+</view>
+
+<view style="height:200rpx"></view>
+
+<view class="pub-comment">
+	<view class="pub-letf">
+		<input class="pub-input" placeholder="评论" bindinput="getSend" maxlength="50"
+			value="{{commentText}}">
+		</input>
+	</view>
+	<view class="pub-button" catchtap="sendComment">发送</view>
+</view>
+
+<!-- 删除提示框 -->
+<view aria-role="dialog" aria-modal="true" class="fadeIn" wx:if="{{delDiaFlag}}">
+	<view class="weui-mask"></view>
+	<view class="weui-dialog">
+		<view class="weui-dialog__hd"><strong class="weui-dialog__title">确认删除</strong></view>
+		<view class="weui-dialog__bd">该操作不可逆，请确认你的操作</view>
+		<view class="weui-dialog__ft">
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_default" bindtap="close">关闭</view>
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_primary" bindtap="affirm" style="color:red">删除</view>
+		</view>
+	</view>
+</view>
+
+<!-- 成功 -->
+<view aria-role="alert" class="fadeIn {{hideToast ? 'fadeOut' : ''}}" wx:if="{{toast}}">
+	<view class="weui-mask_transparent"></view>
+	<view class="weui-toast">
+		<i class="weui-icon-success-no-circle weui-icon_toast"></i>
+		<view class="weui-toast__content">删除成功</view>
+	</view>
+</view>
+
+<!-- 失败 -->
+<view aria-role="alert" class="fadeIn {{hideWarnToast ? 'fadeOut' : ''}}" wx:if="{{warnToast}}">
+	<view class="weui-mask_transparent"></view>
+	<view class="weui-toast">
+		<i class="weui-icon-warn weui-icon_toast"></i>
+		<view class="weui-toast__content">删除失败</view>
+	</view>
+</view>

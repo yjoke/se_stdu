@@ -1,0 +1,114 @@
+<!-- <nav-bar navbar-data='{{nvabarData}}'></nav-bar> -->
+
+
+<block  wx:if="{{authFlag}}">
+<!--悬浮按钮的上半部分-->
+<page-meta root-font-size="system"/>
+<view class="page" data-weui-theme="{{theme}}">
+	<view class="weui-bottom-fixed-opr-page">
+		<view class="weui-bottom-fixed-opr-page__content">
+			<view class="weui-bottom-fixed-opr-demo">
+			
+			
+			
+<!--这是文本框-->
+<view class='wenbenkuang' style='margin-top: {{height*2+20}}px'>
+
+<!--标题和内容-->
+<view class="weui-cells__title">标题</view>
+<view class="weui-cells weui-cells_after-title">
+	<view class="weui-cell weui-cell_active">
+		<view class="weui-cell__bd">
+			<input class="weui-input" placeholder-class="weui-input__placeholder"
+			placeholder="请输入标题" bindinput="getTitle" maxlength="10"
+			value="{{postTitle}}"/>
+		</view>
+	</view>
+</view>
+
+<view class="weui-cells__title">内容</view>
+<view class="weui-cells weui-cells_after-title">
+	<view class="weui-cell weui-cell_active">
+		<view class="weui-cell__bd">
+			<textarea class="weui-textarea" placeholder-class="weui-input__placeholder" 
+			placeholder="请输入内容" style="height: 4.4em" bindinput="getText" maxlength="500" value="{{postText}}">
+			</textarea>
+			<view aria-role="option" title="字数统计" class="weui-textarea-counter">
+				{{words}}/500
+			</view>
+		</view>
+	</view>
+</view>
+	<!--帖子属性部分-->
+<view class="weui-cells__title">选择</view>
+<view class="weui-cells weui-cells_after-title">
+	
+	<label for="js_area" class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+		<view class="weui-cell__hd">
+			<view class="weui-label">帖子属性:</view>
+		</view>
+		<view class="weui-cell__bd">
+			<picker aria-role="combobox" id="js_area" bindchange="bindAttributeChange" value="{{attributeIndex}}" range="{{attributes}}">
+				<view class="weui-select weui-select_in-select-after">{{attributes[attributeIndex]}}</view>
+			</picker>
+		</view>
+	</label>
+</view>
+
+<!--添加图片-->
+<view class="weui-cells">
+<view class="weui-cell weui-cell_uploader">
+<view class="weui-cell__bd">
+<view class="weui-uploader">
+
+	<view class="weui-uploader__hd">
+	</view>
+	
+	<view class="weui-uploader__bd">
+		<!-- 循环显示已经添加的图片 -->
+		<view class="weui-uploader__files" id="uploaderFiles">
+			<block wx:for="{{files}}" wx:key="*this">
+				<view class="weui-uploader__file" bindtap="previewImage" id="{{item}}" >
+					<image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+					<image class="iamge_cancel" src="/images/other/delete.png" mode="aspectFill" catchtap="delete" data-index="{{index}}"/>
+				</view>
+			</block>
+		</view>
+
+		<!-- 加号 -->
+		<view class="weui-uploader__input-box">
+			<view aria-role="button" aria-label="上传" class="weui-uploader__input" bindtap="chooseImage"></view>
+		</view>
+	</view>
+					
+</view>  <!-- 四层属性 -->
+</view>
+</view>
+</view>
+
+</view><!-- 文本框 -->
+
+        <!--这是悬浮按钮下半部分-->
+			</view>
+		</view>
+
+		<view class="weui-bottom-fixed-opr">
+			<button class="weui-btn weui-btn_primary" aria-role="button" bindtap="submit">确认发布</button>
+		</view>
+	</view>
+</view>
+</block>
+<block wx:if="{{!authFlag}}" >
+<!-- 授权框 -->
+<view aria-role="dialog" aria-modal="true" class="fadeIn">
+	<view class="weui-mask"></view>
+	<view class="weui-dialog">
+		<view class="weui-dialog__hd"><strong class="weui-dialog__title">授权</strong></view>
+		<view class="weui-dialog__bd">您还未授权</view>
+		<view class="weui-dialog__ft">
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_default" bindtap="close">取消</view>
+			<view aria-role="button" class="weui-dialog__btn weui-dialog__btn_primary" bindtap="auth" style="color:rgb(59, 230, 82)">授权</view>
+		</view>
+	</view>
+</view>
+</block>

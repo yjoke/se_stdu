@@ -1,0 +1,2 @@
+/* pages/help/help.wxss */
+.page{background-color:var(--weui-BG-2)}image{margin:4px 0}

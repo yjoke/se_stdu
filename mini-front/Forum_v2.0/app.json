@@ -1,0 +1,50 @@
+{
+	"pages": [
+		"pages/welcome/welcome",
+		"pages/index/index",
+		"pages/me/me",
+		"pages/like/like",
+		"pages/comment/comment",
+		"pages/help/help",
+		"pages/suggest/suggest",
+		"pages/postInfo/postInfo",
+		"pages/Postage/Postage",
+		"pages/msg_success/msg_success",
+		"pages/msg_warn/msg_warn"
+	],
+	"permission": {
+	},
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#D53e37",
+		"navigationBarTitleText": "石铁大校园论坛",
+		"navigationBarTextStyle": "white"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "逛逛",
+				"iconPath": "/images/tabBar/zhuye.png",
+				"selectedIconPath": "/images/tabBar/zhuye_active.png"
+			},
+			{
+				"pagePath": "pages/Postage/Postage",
+				"text": "发布",
+				"iconPath": "/images/tabBar/tianjia.png",
+				"selectedIconPath": "/images/tabBar/tianjia_active.png"
+			},
+			{
+				"pagePath": "pages/me/me",
+				"text": "我的",
+				"iconPath": "/images/tabBar/wode.png",
+				"selectedIconPath": "/images/tabBar/wode_active.png"
+			}
+		]
+	},
+	"requiredBackgroundModes": [
+		"audio"
+	],
+	"sitemapLocation": "sitemap.json"
+	
+}

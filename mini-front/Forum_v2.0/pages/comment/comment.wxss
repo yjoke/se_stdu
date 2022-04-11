@@ -1,0 +1,38 @@
+/* pages/comment/comment.wxss */
+
+.order-item {
+  /* height: 120px; */
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.remove{  
+  width: 160rpx;  
+  height: 100%;  
+  background-color: red; 
+  color: white; 
+  position: absolute;  
+  top: 0;  
+  right: -160rpx;  
+  display: flex;  
+  justify-content: center;  
+  align-items: center;  
+} 
+
+/***************/
+.content{
+  display:flex;
+  flex-direction: row;
+}
+.nickname{
+  color:#586B94;
+  font-weight: 550;
+}
+.hr{
+  height:5px;
+  background-color: #cccccc;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  opacity: 0.2;
+}

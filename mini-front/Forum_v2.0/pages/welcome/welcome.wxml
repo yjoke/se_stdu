@@ -1,0 +1,15 @@
+<view class='bg'>
+  <image src='/images/other/load.png' class='full' mode="aspectFill"></image>
+  <view class="myButton" bindtap="next" >{{time >= 0? time : 0}}   跳过</view>
+</view>
+<view class="bottom">
+  <view class="main">
+    <view class="logo">
+      <image src="/images/other/logo.png" mode="widthFix" />
+    </view>
+    <view class="detail">
+      <view class="title">石铁大校园论坛</view>
+      <view class="intro">“论”你所看，“坛”你所想</view>
+    </view>
+  </view>
+</view>
